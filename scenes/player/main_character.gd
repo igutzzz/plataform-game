@@ -3,6 +3,9 @@ extends CharacterBody2D
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -900.0
+
+var jumps = 0
+
 @onready var sprite_2d = $Sprite2D
 
 
@@ -19,11 +22,16 @@ func _physics_process(delta):
 	
 	# Add the gravity.
 	if not is_on_floor():
-		sprite_2d.animation = "jump"
 		velocity.y += gravity * delta	
+		if Input.is_action_just_pressed("jump") and jumps < 1:
+			sprite_2d.play("double_jump")
+			velocity.y = JUMP_VELOCITY * 0.75
+			jumps = jumps +1
+				
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		jumps = 0
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -38,3 +46,10 @@ func _physics_process(delta):
 	
 	var isLeft = velocity.x < 0
 	sprite_2d.flip_h = isLeft	
+	
+
+
+
+
+func animation_finished():
+	return true

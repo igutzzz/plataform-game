@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bu5kx024sd1i0"]
+[gd_scene load_steps=44 format=3 uid="uid://bu5kx024sd1i0"]
 
 [ext_resource type="Script" path="res://scenes/enemies/mushroom.gd" id="1_8jmik"]
 [ext_resource type="Texture2D" uid="uid://bx37irsrhlnyo" path="res://sprites/enemies/mushroom/Idle (32x32).png" id="1_w3260"]
@@ -271,6 +271,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wvurm"]
 size = Vector2(57, 43)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eub22"]
+size = Vector2(47, 5.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ijvrk"]
+size = Vector2(68, 39)
+
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_8jmik")
 
@@ -280,12 +286,25 @@ position = Vector2(1, -13)
 scale = Vector2(2.15625, 2.15625)
 sprite_frames = SubResource("SpriteFrames_8f3ro")
 autoplay = "default"
-frame = 6
-frame_progress = 0.928757
+frame_progress = 0.441371
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_wvurm")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(-16, 20)
 target_position = Vector2(0, 25)
+
+[node name="Top" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2(0.5, -20.75)
+shape = SubResource("RectangleShape2D_eub22")
+
+[node name="Sides" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sides"]
+position = Vector2(5, 2.5)
+shape = SubResource("RectangleShape2D_ijvrk")

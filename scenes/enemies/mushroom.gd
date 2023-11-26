@@ -3,15 +3,31 @@ extends CharacterBody2D
 
 const SPEED = 100
 const JUMP_VELOCITY = -400.0
+const PLAYER = "Player"
 
 var direction = -1
 
 
 @onready var sprite_2d = $Sprite2D
 @onready var ray_cast_2d =$RayCast2D
+@onready var top = $Top
+@onready var sides = $Sides
 
 
 
+func _process(delta):
+	var topAreas = top.get_overlapping_areas()
+	var sideAreas = sides.get_overlapping_areas()
+	for area in topAreas:
+		var parent = area.get_parent()
+		if(parent.name == PLAYER):
+			sprite_2d.play("hit")
+			if(sprite_2d.animation_finished):
+				queue_free()
+	for area in sideAreas:
+		var parent = area.get_parent()
+		if(parent.name == PLAYER):
+			print('morreu')
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _physics_process(delta):
