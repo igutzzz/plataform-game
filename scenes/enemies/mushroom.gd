@@ -25,7 +25,7 @@ func _process(delta):
 			if(sprite_2d.animation_finished):
 				queue_free()
 	for area in sideAreas:
-		var parent = area.get_parent()
+		var parent = area.get_parent()	
 		if(parent.name == PLAYER):
 			print('morreu')
 # Get the gravity from the project settings to be synced with RigidBody nodes.
