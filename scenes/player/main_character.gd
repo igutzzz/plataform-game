@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 
 const SPEED = 400.0
 const JUMP_VELOCITY = -900.0
@@ -20,6 +20,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 #		print("jumpando")
 
 		
+func _ready():
+	GameManager.player = self
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -32,7 +34,8 @@ func _physics_process(delta):
 #			sprite_2d.animation = "jump"
 			velocity.y += gravity * delta	
 				
-
+	if(position.y >=1100):
+		die()
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jumps = 0
@@ -72,4 +75,7 @@ func _animation_player_animation_finished(anim_name):
 func _input(event: InputEvent):
 	if event.is_action_pressed("down") and is_on_floor():
 			position.y +=1
+			
+func die():
+	GameManager.respawn()
 
