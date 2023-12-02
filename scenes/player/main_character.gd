@@ -78,4 +78,5 @@ func _input(event: InputEvent):
 			
 func die():
 	GameManager.respawn()
+	
 

@@ -24,5 +24,6 @@ func pick_coin(coinsPicked: int):
 func respawn():
 	if currentSpawn != null:
 		player.position = currentSpawn.position
+		coins = 0
 		get_tree().reload_current_scene()
 	

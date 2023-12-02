@@ -1,21 +1,59 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddlu421d74tsl"]
+[gd_scene load_steps=6 format=3 uid="uid://ddlu421d74tsl"]
+
+[ext_resource type="Script" path="res://ui/hud/coinManager.gd" id="1_0funo"]
+[ext_resource type="Texture2D" uid="uid://dj6dbuk5smyjo" path="res://ui/hud/strawberry_ui.png" id="1_j7om8"]
+[ext_resource type="FontFile" uid="uid://cocr0qp8ocg72" path="res://ui/fonts/Gamer.ttf" id="3_io813"]
+
+[sub_resource type="GDScript" id="GDScript_l7tym"]
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="Theme" id="Theme_na5na"]
+default_font = ExtResource("3_io813")
+default_font_size = 28
 
-[node name="Control" type="Control"]
+[node name="CoinDisplay" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = SubResource("GDScript_l7tym")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_0funo")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 159.0
-offset_bottom = 41.0
+[node name="Strawberry" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = -12.0
+offset_right = 11.0
+offset_bottom = -628.0
+grow_vertical = 2
+scale = Vector2(2, 2)
+size_flags_horizontal = 0
+texture = ExtResource("1_j7om8")
+stretch_mode = 2
+
+[node name="CoinDisplay" type="RichTextLabel" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 27.0
+offset_right = 185.0
+offset_bottom = 39.0
 theme = SubResource("Theme_na5na")
-text = "Teste"
+theme_override_font_sizes/normal_font_size = 40
+text = "0"
+fit_content = true
